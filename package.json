@@ -1,10 +1,12 @@
 {
   "name": "automacao-migracao",
   "version": "1.0.0",
+  "type": "module",
   "description": "uma automação em JavaScript ou TypeScript que lê um arquivo CSV de migrações de plano e atualiza os contratos de internet no banco de dados.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:init": "tsx scripts/init-db.ts"
   },
   "repository": {
     "type": "git",
