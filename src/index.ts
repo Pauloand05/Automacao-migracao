@@ -1,11 +1,16 @@
 import { resolve } from "node:path";
 import { lerCSV } from "./csv.js";
-import { validarMigracao } from "./migration.js";
+import { validarMigracao, buscarNomeContrato } from "./migration.js";
 import {
   atualizarPlanoContrato,
   executarEmTransacao,
   fecharBanco
 } from "./database.js";
+import {
+  gerarRelatorio,
+  type MigracaoRejeitada
+} from "./report.js"
+
 
 // Obtém o caminho do CSV informado pelo usuário
 const caminhoInformado = process.argv[2];
@@ -20,8 +25,8 @@ if (!caminhoInformado) {
 // Controla os contratos encontrados no CSV
 const contratosProcessados = new Set<number>();
 
-// Armazena as solicitações rejeitadas
-const rejeitados = [];
+// Armazena as solicitações rejeitadas para gerar o relatório
+const rejeitados: MigracaoRejeitada[] = [];
 
 let atualizados = 0;
 
@@ -41,16 +46,18 @@ try {
         contratosProcessados
       );
 
-      // Se alguma validação falhar, registra a rejeição
       if (!resultado.aprovado) {
-        rejeitados.push({
-          ...migracao,
-          motivo: resultado.motivo
-        });
 
-        // Continua o processamento das próximas solicitações
-        continue;
-      }
+      // Armazena a solicitação e o motivo da rejeição
+      rejeitados.push({
+        ...migracao,
+        nome: buscarNomeContrato(migracao.id),
+        motivo: resultado.motivo ?? "Linha inválida"
+      });
+
+      // Continua para a próxima solicitação
+      continue;
+    }
 
       // Atualiza somente os contratos aprovados
       const atualizado = atualizarPlanoContrato(
@@ -72,6 +79,9 @@ try {
       atualizados++;
     }
   });
+
+  // Gera o relatório somente após concluir as atualizações
+  gerarRelatorio(rejeitados);
     
   // Exibe o resumo solicitado pela empresa
   console.log("\nResumo da execução:");

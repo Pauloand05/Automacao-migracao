@@ -22,7 +22,8 @@
   "homepage": "https://github.com/Pauloand05/Automacao-migracao#readme",
   "dependencies": {
     "better-sqlite3": "^13.0.3",
-    "csv-parse": "^7.0.3"
+    "csv-parse": "^7.0.3",
+    "csv-stringify": "^6.9.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^9.6.0",
