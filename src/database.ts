@@ -2,8 +2,10 @@ import Database from "better-sqlite3";
 import { resolve } from "node:path";
 import type { Contrato, Plano } from "./types.js";
 
-// Define o caminho do banco de dados
-const databasePath = resolve(process.cwd(), "database.sqlite");
+// Utiliza o banco informado pelo ambiente ou o banco padrão
+const databasePath = resolve(
+  process.env.DATABASE_PATH ?? "database.sqlite"
+);
 
 // Abre uma conexão com o banco SQLite 
 const db = new Database(databasePath, {

@@ -2,8 +2,10 @@ import Database from "better-sqlite3";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-// Define o caminho do banco de dados e do arquivo SQL
-const databasePath = resolve(process.cwd(), "database.sqlite");
+// Utiliza o banco informado pelo ambiente ou o banco padrão
+const databasePath = resolve(
+  process.env.DATABASE_PATH ?? "database.sqlite"
+);
 const seedPath = resolve(process.cwd(), "seed.sql");
 
 //  Abre a conexão com o SQLite.
