@@ -6,7 +6,7 @@ O sistema recebe um arquivo CSV contendo solicitações de mudança de plano, ve
 
 ## 1. Tecnologias utilizadas
 
-- **Node.js 22:** ambiente de execução JavaScript.
+- **Node.js 22:** ambiente de execução JavaScript utilizado nos testes.
 - **TypeScript:** linguagem utilizada no desenvolvimento.
 - **SQLite:** banco de dados relacional.
 - **better-sqlite3:** acesso ao banco, consultas e transações.
@@ -35,7 +35,7 @@ A aplicação permite:
 
 Para executar o projeto, é necessário ter instalado:
 
-- Node.js 18 ou superior.
+- Node.js 22 (versão utilizada e validada neste projeto).
 - npm.
 
 Não é necessário instalar um servidor SQLite separadamente.
@@ -171,23 +171,23 @@ O relatório é sobrescrito a cada execução bem-sucedida.
 ```text
 Automacao-migracao/
 ├── scripts/
-│   ├── init-db.ts
-│   ├── test-db.ts
-│   ├── test-migration.ts
-│   └── test-update.ts
+│   ├── init-db.ts
+│   ├── test-db.ts
+│   ├── test-migration.ts
+│   └── test-update.ts
 ├── src/
-│   ├── index.ts
-│   ├── csv.ts
-│   ├── database.ts
-│   ├── migration.ts
-│   ├── report.ts
-│   └── types.ts
+│   ├── index.ts
+│   ├── csv.ts
+│   ├── database.ts
+│   ├── migration.ts
+│   ├── report.ts
+│   └── types.ts
 ├── tests/
-│   ├── csv.test.ts
-│   ├── migration.test.ts
-│   ├── integration.test.ts
-│   ├── rollback.test.ts
-│   └── setup-migration.ts
+│   ├── csv.test.ts
+│   ├── migration.test.ts
+│   ├── integration.test.ts
+│   ├── rollback.test.ts
+│   └── setup-migration.ts
 ├── migracoes_planos.csv
 ├── seed.sql
 ├── package.json
@@ -288,5 +288,3 @@ Os testes utilizam bancos temporários, evitando que suas execuções interfiram
 O projeto automatiza a migração de planos de internet, aplicando regras de negócio, mantendo a integridade dos contratos e disponibilizando um relatório das solicitações que não puderam ser processadas.
 
 A implementação prioriza simplicidade, separação de responsabilidades, validações e facilidade de execução pelo terminal.
-
-fixtell
